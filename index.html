@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .weird-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            white-space: nowrap;
+            animation: glitch 1.5s infinite alternate;
+        }
+        @keyframes glitch {
+            0% { transform: translate(-50%, -50%) skew(0deg, 0deg); }
+            25% { transform: translate(-50%, -50%) skew(5deg, -5deg); color: rgba(255, 255, 255, 0.8); }
+            50% { transform: translate(-50%, -50%) skew(-5deg, 5deg); color: rgba(255, 255, 255, 0.5); }
+            75% { transform: translate(-50%, -50%) skew(2deg, -2deg); color: rgba(255, 255, 255, 0.9); }
+            100% { transform: translate(-50%, -50%) skew(0deg, 0deg); }
+        }
+
+        .cursor-trail {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            pointer-events: none;
+            opacity: var(--opacity, 0.6);
+            transition: transform 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="weird-text">???</div>
+    <script>
+        // Массив для следов
+        const trail = [];
+        const maxTrail = 20; // Длина следа
+        const trailOpacity = 0.6; // Прозрачность следа
+
+        // Слушаем движение мыши
+        document.addEventListener("mousemove", (e) => {
+            const trailElement = document.createElement("div");
+            trailElement.className = "cursor-trail";
+            document.body.appendChild(trailElement);
+
+            trail.push(trailElement);
+            updateTrail(e.clientX, e.clientY);
+
+            // Ограничиваем количество следов
+            if (trail.length > maxTrail) {
+                document.body.removeChild(trail.shift());
+            }
+        });
+
+        // Обновляем позицию следов
+        function updateTrail(x, y) {
+            trail.forEach((el) => {
+                el.style.transform = `translate(${x}px, ${y}px)`;
+                el.style.opacity = trailOpacity; // Прозрачность каждого следа
+            });
+        }
+    </script>
+</body>
+</html>

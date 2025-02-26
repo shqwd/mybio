@@ -1,0 +1,11 @@
+.cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    pointer-events: none;
+    opacity: var(--opacity, 0.6);
+    transition: transform 0.1s, opacity 0.3s;
+}
