@@ -1,6 +1,6 @@
 const trail = [];
-const maxTrail = 20; // Длина следа
-const trailOpacity = 0.6; // Прозрачность следа
+const maxTrail = 20;
+const trailOpacity = 0.6;
 
 document.addEventListener("mousemove", (e) => {
     const trailElement = document.createElement("div");
