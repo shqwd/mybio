@@ -49,12 +49,10 @@
 <body>
     <div class="weird-text">???</div>
     <script>
-        // Массив для следов
         const trail = [];
-        const maxTrail = 20; // Длина следа
-        const trailOpacity = 0.6; // Прозрачность следа
+        const maxTrail = 20;
+        const trailOpacity = 0.6;
 
-        // Слушаем движение мыши
         document.addEventListener("mousemove", (e) => {
             const trailElement = document.createElement("div");
             trailElement.className = "cursor-trail";
@@ -63,17 +61,15 @@
             trail.push(trailElement);
             updateTrail(e.clientX, e.clientY);
 
-            // Ограничиваем количество следов
             if (trail.length > maxTrail) {
                 document.body.removeChild(trail.shift());
             }
         });
 
-        // Обновляем позицию следов
         function updateTrail(x, y) {
             trail.forEach((el) => {
                 el.style.transform = `translate(${x}px, ${y}px)`;
-                el.style.opacity = trailOpacity; // Прозрачность каждого следа
+                el.style.opacity = trailOpacity;
             });
         }
     </script>
